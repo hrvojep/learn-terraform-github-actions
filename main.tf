@@ -9,7 +9,7 @@ terraform {
   }
 
   backend "remote" {
-    organization = "h-test" 
+    organization = "h-test"
 
     workspaces {
       name = "gh-actions-demo"
@@ -22,7 +22,7 @@ terraform {
 provider "aws" {
   region = "us-west-2"
 }
-   
+
 provider "random" {}
 
 resource "random_pet" "sg" {}
@@ -43,12 +43,12 @@ resource "aws_security_group" "web-sg" {
   name = "${random_pet.sg.id}-sg"
   ingress {
     from_port   = 8080
-    to_port     = 8081
+    to_port     = 8083
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
 
 output "web-address" {
-  value = "${aws_instance.web.public_dns}:8081"
+  value = "${aws_instance.web.public_dns}:8083"
 }
